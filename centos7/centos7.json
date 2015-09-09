@@ -2,6 +2,7 @@
     "builders": [
         {
             "type": "virtualbox-iso",
+            "guest_os_type": "RedHat_64",
             "iso_checksum": "498bb78789ddc7973fe14358822eb1b48521bbaca91c17bd132c7f8c903d79b3",
             "iso_checksum_type": "sha256",
             "iso_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-NetInstall-1503.iso",
