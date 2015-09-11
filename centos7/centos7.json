@@ -8,10 +8,17 @@
             "iso_url": "http://mirrors.kernel.org/centos/7/isos/x86_64/CentOS-7-x86_64-NetInstall-1503.iso",
             "ssh_username": "root",
             "ssh_password": "vagrant",
+            "ssh_timeout": "10m",
             "boot_command": "<tab> ip=dhcp ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter>",
             "http_directory": "centos7",
             "shutdown_command": "poweroff",
             "vm_name": "centos-7.0-nocm"
+        }
+    ],
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "output": "centos7-{{ .Provider }}.box"
         }
     ]
 }
