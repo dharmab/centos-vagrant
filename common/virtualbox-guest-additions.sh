@@ -2,7 +2,7 @@
 
 set -e
 
-yum -y install dkms
+yum -y install dkms bzip2
 mountpoint=/tmp/virtualbox-guest-addtions
 guest_additions_iso=/tmp/VBoxGuestAdditions.iso
 mkdir ${mountpoint}

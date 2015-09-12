@@ -12,7 +12,7 @@
             "ssh_timeout": "15m",
             "boot_command": "<tab> ip=dhcp ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter>",
             "http_directory": "centos7",
-            "shutdown_command": "poweroff",
+            "shutdown_command": "sudo /usr/sbin/poweroff",
             "vm_name": "centos-7.0-nocm"
         }
     ],
