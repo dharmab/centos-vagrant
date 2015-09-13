@@ -58,11 +58,13 @@ except RuntimeError as e:
 # Preemptively remove any failed downloads
 delete_file(get_packer_archive_path())
 
+# Ensure that the packer binary directory exists
+if not os.path.exists(get_packer_binaries_path()):
+    os.makedirs(get_packer_binaries_path())
+
 # Check if the packer executable is already present
 # If not, download and extract it
 if not os.path.isfile(get_packer_path()):
-    if not os.path.exists(get_packer_binaries_path()):
-        os.makedirs(get_packer_binaries_path())
     try:
         urllib.urlretrieve(packer_download_url, get_packer_archive_path())
         with zipfile.ZipFile(get_packer_archive_path(), "r") as packer_archive:
