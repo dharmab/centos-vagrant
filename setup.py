@@ -20,5 +20,5 @@ if not os.path.isfile(bin_path + "/packer"):
 
 for root, subdirectories, files in os.walk(bin_path):
     for f in files:
-        os.chmod("%s/%s" % (root, f), 0755)
+        os.chmod(root +  "/" + f, 755)
 
