@@ -13,16 +13,17 @@ def get_packer_download_url():
     if sys.maxsize < 2**32:
         raise RuntimeError("A 64-bit system is required")
 
+    base_url = "https://dl.bintray.com/mitchelh/packer/"
     system = platform.system().lower()
     if system.startswith("linux"):
-        return "https://dl.bintray.com/mitchellh/packer/packer_0.8.6_linux_amd64.zip"
+        return base_url + "packer_0.8.6_linux_amd64.zip"
     # Mac OSX
     elif system == "darwin":
-        return "https://dl.bintray.com/mitchellh/packer/packer_0.8.6_darwin_amd64.zip"
+        return base_url + "packer_0.8.6_darwin_amd64.zip"
     elif system == "win32":
-        return "https://dl.bintray.com/mitchellh/packer/packer_0.8.6_windows_amd64.zip" 
+        return base_url + "packer_0.8.6_windows_amd64.zip"
     elif system.startswith("freebsd"):
-        return "https://dl.bintray.com/mitchellh/packer/packer_0.8.6_freebsd_amd64.zip" 
+        return base_url + "packer_0.8.6_freebsd_amd64.zip"
     else:
         raise RuntimeError(platform.system() + " is not a supported platform")
 
@@ -75,5 +76,4 @@ if not os.path.isfile(get_packer_path()):
 # Ensure that packer binaries are marked as executable
 for root, subdirectories, files in os.walk(get_packer_binaries_path()):
     for f in files:
-        os.chmod(root +  "/" + f, 755)
-
+        os.chmod(root + "/" + f, 755)
