@@ -49,31 +49,38 @@ def get_packer_path():
     return get_packer_binaries_path() + "/packer"
 
 
-try:
-    packer_download_url = get_packer_download_url()
-except RuntimeError as e:
-    # Unsupported platform
-    print(str(e))
-    exit(1)
-
-# Preemptively remove any failed downloads
-delete_file(get_packer_archive_path())
-
-# Ensure that the packer binary directory exists
-if not os.path.exists(get_packer_binaries_path()):
-    os.makedirs(get_packer_binaries_path())
-
-# Check if the packer executable is already present
-# If not, download and extract it
-if not os.path.isfile(get_packer_path()):
+def main():
     try:
-        urllib.urlretrieve(packer_download_url, get_packer_archive_path())
-        with zipfile.ZipFile(get_packer_archive_path(), "r") as packer_archive:
-            packer_archive.extractall(path=get_packer_binaries_path())
-    finally:
-        delete_file(get_packer_archive_path())
+        packer_download_url = get_packer_download_url()
+    except RuntimeError as e:
+        # Unsupported platform
+        print(str(e))
+        exit(1)
 
-# Ensure that packer binaries are marked as executable
-for root, subdirectories, files in os.walk(get_packer_binaries_path()):
-    for f in files:
-        os.chmod(root + "/" + f, 755)
+    # Preemptively remove any failed downloads
+    delete_file(get_packer_archive_path())
+
+    # Ensure that the packer binary directory exists
+    if not os.path.exists(get_packer_binaries_path()):
+        os.makedirs(get_packer_binaries_path())
+
+    # Check if the packer executable is already present
+    # If not, download and extract it
+    if not os.path.isfile(get_packer_path()):
+        print("Did not find packer executable, downloadling...")
+        try:
+            urllib.urlretrieve(packer_download_url, get_packer_archive_path())
+            with zipfile.ZipFile(get_packer_archive_path(), "r") as archive:
+                archive.extractall(path=get_packer_binaries_path())
+        finally:
+            delete_file(get_packer_archive_path())
+    else:
+        print("packer executable found, skipping download...")
+
+    # Ensure that packer binaries are marked as executable
+    for root, subdirectories, files in os.walk(get_packer_binaries_path()):
+        for f in files:
+            os.chmod(root + "/" + f, 755)
+
+if __name__ == "__main__":
+    main()
