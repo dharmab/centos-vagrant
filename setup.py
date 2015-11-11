@@ -13,14 +13,14 @@ def get_packer_download_url():
     if sys.maxsize < 2**32:
         raise RuntimeError("A 64-bit system is required")
 
-    base_url = "https://dl.bintray.com/mitchelh/packer/"
+    base_url = "https://releases.hashicorp.com/packer/0.8.6/"
     system = platform.system().lower()
     if system.startswith("linux"):
         return base_url + "packer_0.8.6_linux_amd64.zip"
     # Mac OSX
     elif system == "darwin":
         return base_url + "packer_0.8.6_darwin_amd64.zip"
-    elif system == "win32":
+    elif system == "windows":
         return base_url + "packer_0.8.6_windows_amd64.zip"
     elif system.startswith("freebsd"):
         return base_url + "packer_0.8.6_freebsd_amd64.zip"
@@ -38,15 +38,21 @@ def get_script_path():
 
 
 def get_packer_archive_path():
-    return get_script_path() + "/__packer.zip"
+    return os.path.join(get_script_path() , "packer.zip")
 
 
 def get_packer_binaries_path():
-    return get_script_path() + "/bin"
+    return os.path.join(get_script_path(), "bin")
 
+
+def is_windows():
+    return platform.system().lower() == "windows"
 
 def get_packer_path():
-    return get_packer_binaries_path() + "/packer"
+    packer_binary = "packer"
+    if is_windows:
+        packer_binary = "packer.exe"
+    return os.path.join(get_packer_binaries_path(), packer_binary)
 
 
 def main():
@@ -67,7 +73,7 @@ def main():
     # Check if the packer executable is already present
     # If not, download and extract it
     if not os.path.isfile(get_packer_path()):
-        print("Did not find packer executable, downloadling...")
+        print("Did not find packer executable, downloading...")
         try:
             urllib.urlretrieve(packer_download_url, get_packer_archive_path())
             with zipfile.ZipFile(get_packer_archive_path(), "r") as archive:
@@ -77,10 +83,13 @@ def main():
     else:
         print("packer executable found, skipping download...")
 
-    # Ensure that packer binaries are marked as executable
-    for root, subdirectories, files in os.walk(get_packer_binaries_path()):
-        for f in files:
-            os.chmod(root + "/" + f, 755)
+    if not is_windows():
+        # Ensure that packer binaries are marked as executable
+        for root, subdirectories, files in os.walk(get_packer_binaries_path()):
+            for f in files:
+                os.chmod(os.path.join(root, f), 755)
+
+
 
 if __name__ == "__main__":
     main()
