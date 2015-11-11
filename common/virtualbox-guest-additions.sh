@@ -5,7 +5,7 @@
 set -e
 
 # Only run this script if actually running a VirtualBox build
-if [ "${PACKER_BUILDER_TYPE}" != "virtualbox-iso"] && [ "${PACKER_BUILDER_TYPE}" != "virtualbox-ovf"]; then
+if [ "${PACKER_BUILDER_TYPE}" != "virtualbox-iso" ] && [ "${PACKER_BUILDER_TYPE}" != "virtualbox-ovf" ]; then
     exit 0
 fi
 
