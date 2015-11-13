@@ -2,3 +2,4 @@ bin/
 packer_cache
 *.zip
 *.box
+.vagrant/
