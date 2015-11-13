@@ -27,6 +27,15 @@
         {
             "type": "vagrant",
             "output": "centos7-{{ .Provider }}.box"
+        },
+        {
+            "type": "atlas",
+            "artifact": "dharmab/centos7",
+            "artifact_type": "vagrant.box",
+            "metadata": {
+                "provider": "virtualbox",
+                "version": "0.1.0"
+            }
         }
     ]
 }
