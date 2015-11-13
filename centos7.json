@@ -19,7 +19,7 @@
     "provisioners": [
         {
             "type": "shell",
-            "script": "common/virtualbox-guest-additions.sh",
+            "script": "virtualbox-guest-additions.sh",
             "execute_command": "chmod +x {{ .Path }}; echo 'vagrant' | {{ .Vars }} sudo -E -S {{ .Path }}"
         }
     ],
