@@ -20,8 +20,6 @@ def get_packer_download_url():
     # Mac OSX
     elif system == "darwin":
         return base_url + "packer_0.8.6_darwin_amd64.zip"
-    elif system == "windows":
-        return base_url + "packer_0.8.6_windows_amd64.zip"
     elif system.startswith("freebsd"):
         return base_url + "packer_0.8.6_freebsd_amd64.zip"
     else:
@@ -38,7 +36,7 @@ def get_script_path():
 
 
 def get_packer_archive_path():
-    return os.path.join(get_script_path() , "packer.zip")
+    return os.path.join(get_script_path(), "packer.zip")
 
 
 def get_packer_binaries_path():
@@ -47,6 +45,7 @@ def get_packer_binaries_path():
 
 def is_windows():
     return platform.system().lower() == "windows"
+
 
 def get_packer_path():
     packer_binary = "packer"
