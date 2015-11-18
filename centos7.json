@@ -10,10 +10,10 @@
             "ssh_username": "vagrant",
             "ssh_password": "vagrant",
             "ssh_timeout": "15m",
+            "http_directory": ".",
             "boot_command": "<tab> ip=dhcp ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter>",
-            "http_directory": "centos7",
             "shutdown_command": "sudo /usr/sbin/poweroff",
-            "vm_name": "centos-7.0-nocm"
+            "vm_name": "centos7"
         }
     ],
     "provisioners": [
@@ -37,5 +37,9 @@
                 "version": "0.1.0"
             }
         }
-    ]
+    ],
+    "push": {
+        "name": "dharmab/centos7",
+        "vcs": true
+    }
 }
