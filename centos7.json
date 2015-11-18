@@ -24,19 +24,21 @@
         }
     ],
     "post-processors": [
-        {
-            "type": "vagrant",
-            "output": "centos7-{{ .Provider }}.box"
-        },
-        {
-            "type": "atlas",
-            "artifact": "dharmab/centos7",
-            "artifact_type": "vagrant.box",
-            "metadata": {
-                "provider": "virtualbox",
-                "version": "1.0.0"
+        [
+            {
+                "type": "vagrant",
+                "output": "centos7-{{ .Provider }}.box"
+            },
+            {
+                "type": "atlas",
+                "artifact": "dharmab/centos7",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "provider": "virtualbox",
+                    "version": "1.0.1"
+                }
             }
-        }
+        ]
     ],
     "push": {
         "name": "dharmab/centos7",
