@@ -1,6 +1,9 @@
 # CentOS Packer Build Project
 
-[Packer](https://packer.io) automation to build a CentOS 7 virtual machine for use with [Vagrant](https://vagrantup.com). To use this box in your own project, type `vagrant init dharmab/centos7`.
+[Packer](https://packer.io) automation to build CentOS virtual machines for use with [Vagrant](https://vagrantup.com). To use these boxes in your own project, type one of the following commands:
+
+- CentOS 7: `vagrant init dharmab/centos7`.
+- CentOS 6: `vagrant init dharmab/centos6`.
 
 The box versioning on Atlas follows [Semantic Versioning](http://semver.org).
 
@@ -8,16 +11,20 @@ The box versioning on Atlas follows [Semantic Versioning](http://semver.org).
 
 1. Run `setup.py` with Python 2 to download Packer
 1. Generate an [Atlas](https://atlas.hashicorp.com) API key and run `export ATLAS_TOKEN="<api key>"` 
-1. If you are not [dharmab](http://www.dharmab.com), edit `centos7.json` and change `push.name` to `<atlas organization>/centos7`
-1. Run `bin/packer push centos7.json` to push the build to Atlas and queue a build.
+1. If you are not [dharmab](http://www.dharmab.com), edit the JSON templates and change `push.name` to `<atlas organization>/<box name>`
+1. Run the following commands to push the build to Atlas and queue a build.
+```bash
+bin/packer build centos7.json
+bin/packer build centos6.json
+```
 
 ## Box Information
 
 This section should be considered the 'Public API' for the purposes of Semantic Versioning.
 
-- The artifact(s) of this Packer template are Vagrant box(es) for CentOS 7.
+- The artifact(s) of this Packer template are Vagrant boxes for CentOS 6 and CentOS 7.
 - VirtualBox is a supported provider.
-  - The VirtualBox box includes the VirtualBox Guest Additions for VirtualBox 5.
+  - The VirtualBox boxes include the VirtualBox Guest Additions for VirtualBox 5.
 - All packages in the `core` group are installed.
 - The [Extra Packages for Enterprise Linux](https://fedoraproject.org/wiki/EPEL) repository (EPEL) is enabled.
 - All installed packages are fully up to date at build time. 
