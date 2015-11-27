@@ -1,6 +1,9 @@
 # CentOS Packer Build Project
 
-[Packer](https://packer.io) automation to build a CentOS virtual machines for use with [Vagrant](https://vagrantup.com). To use this box in your own project, type `vagrant init dharmab/centos7`.
+[Packer](https://packer.io) automation to build CentOS virtual machines for use with [Vagrant](https://vagrantup.com). To use these boxes in your own project, type one of the following commands:
+
+- CentOS 7: `vagrant init dharmab/centos7`.
+- CentOS 6: `vagrant init dharmab/centos6`.
 
 The box versioning on Atlas follows [Semantic Versioning](http://semver.org).
 
