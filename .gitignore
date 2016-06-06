@@ -1,5 +1,6 @@
+*.box
+*.zip
+.DS_Store
+.vagrant/
 bin/
 packer_cache
-*.zip
-*.box
-.vagrant/
