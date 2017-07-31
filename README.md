@@ -7,6 +7,13 @@
 
 The box versioning on Atlas follows [Semantic Versioning](http://semver.org).
 
+I haven't been maintaining this lately because my environment is now Docker/CoreOS based. But it should be pretty simple for someone else to maintain themselves. Just change the following in each Packer template:
+
+- `builders.iso_url`
+- `builders.iso_checksum`
+- `post-processors[.type = "atlas"].artifact`
+- `push.name`
+
 ## Quick Build
 
 1. Run `setup.py` with Python 2 to download Packer
